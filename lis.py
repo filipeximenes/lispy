@@ -28,14 +28,11 @@ def recursive_parse_tokens(tokens):
 
     if tokens[0] == '(':
         close_index = close_bracket_index(tokens)
-        if len(tokens) > close_index:
-            first = [recursive_parse_tokens(tokens[1:close_index])]
-            second = recursive_parse_tokens(tokens[close_index+1:])
-            if second:
-                return first + second
-            else:
-                return first
-        else:
-            return [recursive_parse_tokens(tokens[1:close_index])]
+        first = [recursive_parse_tokens(tokens[1:close_index])]
+
+        if len(tokens) > (close_index + 1):
+            return first + recursive_parse_tokens(tokens[close_index+1:])
+
+        return first
     else:
         return recursive_parse_tokens(tokens[:1]) + recursive_parse_tokens(tokens[1:])
