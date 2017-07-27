@@ -27,9 +27,9 @@ def recursive_parse_tokens(tokens):
         close_index = close_bracket_index(tokens)
         first = [recursive_parse_tokens(tokens[1:close_index])]
 
-        if len(tokens) == (close_index + 1):
+        if (close_index + 1) == len(tokens):  # if no expressions left
             return first
-
-        return first + recursive_parse_tokens(tokens[close_index+1:])
+        else:
+            return first + recursive_parse_tokens(tokens[close_index+1:])
     else:
         return recursive_parse_tokens(tokens[:1]) + recursive_parse_tokens(tokens[1:])
