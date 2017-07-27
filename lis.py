@@ -1,7 +1,4 @@
 
-operations = ['begin', '+', '-']
-
-
 def tokenize(program):
     return program.replace('(', ' ( ').replace(')', ' ) ').split()
 
@@ -40,7 +37,5 @@ def recursive_parse_tokens(tokens):
                 return first
         else:
             return [recursive_parse_tokens(tokens[1:close_index])]
-    elif tokens[0] in operations:
-        return [tokens[0]] + recursive_parse_tokens(tokens[1:])
     else:
-        return [tokens[0]] + recursive_parse_tokens(tokens[1:])
+        return recursive_parse_tokens(tokens[:1]) + recursive_parse_tokens(tokens[1:])
