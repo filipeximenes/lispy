@@ -44,6 +44,16 @@ class RecursiveParseTestCase(unittest.TestCase):
             recursive_parse('(begin (+ (+ 3 6) (- 3 2)))'),
             ['begin', ['+', ['+', '3', '6'], ['-', '3', '2']]])
 
+    def test_even_more_more_nested_exp(self):
+        self.assertEqual(
+            recursive_parse('(begin (+ (+ 3 6) (- 3 2) (+ (- 1 1) 3)))'),
+            ['begin', ['+', ['+', '3', '6'], ['-', '3', '2'], ['+', ['-', '1', '1'], '3']]])
+
+    def test_define_exp(self):
+        self.assertEqual(
+            recursive_parse('(begin (define r 3) (+ r 5))'),
+            ['begin', ['define', 'r', '3'], ['+', 'r', '5']])
+
 
 if __name__ == '__main__':
     unittest.main()
