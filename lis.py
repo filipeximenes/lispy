@@ -21,7 +21,7 @@ def close_bracket_index(tokens, index=0, opening=0, closing=0):
 
 def parse_tokens(tokens):
     if len(tokens) == 1:
-        return tokens
+        return [atom(tokens[0])]
 
     if tokens[0] == '(':
         close_index = close_bracket_index(tokens)
@@ -33,3 +33,13 @@ def parse_tokens(tokens):
             return first + parse_tokens(tokens[close_index+1:])
     else:
         return parse_tokens(tokens[:1]) + parse_tokens(tokens[1:])
+
+
+def atom(token):
+    try:
+        return int(token)
+    except ValueError:
+        try:
+            return float(token)
+        except ValueError:
+            return token
