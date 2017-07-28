@@ -3,8 +3,8 @@ def tokenize(program):
     return program.replace('(', ' ( ').replace(')', ' ) ').split()
 
 
-def recursive_parse(program):
-    return recursive_parse_tokens(tokenize(program))[0]
+def parse(program):
+    return parse_tokens(tokenize(program))[0]
 
 
 def close_bracket_index(tokens, index=0, opening=0, closing=0):
@@ -19,17 +19,17 @@ def close_bracket_index(tokens, index=0, opening=0, closing=0):
         return close_bracket_index(tokens[1:], index=index+1, opening=opening, closing=closing)
 
 
-def recursive_parse_tokens(tokens):
+def parse_tokens(tokens):
     if len(tokens) == 1:
         return tokens
 
     if tokens[0] == '(':
         close_index = close_bracket_index(tokens)
-        first = [recursive_parse_tokens(tokens[1:close_index])]
+        first = [parse_tokens(tokens[1:close_index])]
 
         if (close_index + 1) == len(tokens):  # if no expressions left
             return first
         else:
-            return first + recursive_parse_tokens(tokens[close_index+1:])
+            return first + parse_tokens(tokens[close_index+1:])
     else:
-        return recursive_parse_tokens(tokens[:1]) + recursive_parse_tokens(tokens[1:])
+        return parse_tokens(tokens[:1]) + parse_tokens(tokens[1:])

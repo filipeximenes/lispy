@@ -1,6 +1,6 @@
 import unittest
 
-from lis import tokenize, recursive_parse, close_bracket_index
+from lis import tokenize, parse, close_bracket_index
 
 
 class TokenizeTestCase(unittest.TestCase):
@@ -34,24 +34,24 @@ class CloseBracketIndexTestCase(unittest.TestCase):
 class RecursiveParseTestCase(unittest.TestCase):
 
     def test_simple_exp(self):
-        self.assertEqual(recursive_parse('(begin (+ 1 2))'), ['begin', ['+', '1', '2']])
+        self.assertEqual(parse('(begin (+ 1 2))'), ['begin', ['+', '1', '2']])
 
     def test_nested_exp(self):
-        self.assertEqual(recursive_parse('(begin (+ 1 (- 3 2)))'), ['begin', ['+', '1', ['-', '3', '2']]])
+        self.assertEqual(parse('(begin (+ 1 (- 3 2)))'), ['begin', ['+', '1', ['-', '3', '2']]])
 
     def test_even_more_nested_exp(self):
         self.assertEqual(
-            recursive_parse('(begin (+ (+ 3 6) (- 3 2)))'),
+            parse('(begin (+ (+ 3 6) (- 3 2)))'),
             ['begin', ['+', ['+', '3', '6'], ['-', '3', '2']]])
 
     def test_even_more_more_nested_exp(self):
         self.assertEqual(
-            recursive_parse('(begin (+ (+ 3 6) (- 3 2) (+ (- 1 1) 3)))'),
+            parse('(begin (+ (+ 3 6) (- 3 2) (+ (- 1 1) 3)))'),
             ['begin', ['+', ['+', '3', '6'], ['-', '3', '2'], ['+', ['-', '1', '1'], '3']]])
 
     def test_define_exp(self):
         self.assertEqual(
-            recursive_parse('(begin (define r 3) (+ r 5))'),
+            parse('(begin (define r 3) (+ r 5))'),
             ['begin', ['define', 'r', '3'], ['+', 'r', '5']])
 
 
