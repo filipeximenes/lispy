@@ -1,3 +1,6 @@
+import operator as op
+
+
 Symbol = str
 List = list
 Number = (int, float)
@@ -49,9 +52,15 @@ def atom(token):
             return token
 
 
+env = {
+    '+': op.add, '-': op.sub,
+}
+
+
 def run(x):
     if isinstance(x, Number):
         return x
-    elif x[0] == '+':
+    else:
+        proc = env[x[0]]
         _, p1, p2 = x
-        return run(p1) + run(p2)
+        return proc(run(p1), run(p2))

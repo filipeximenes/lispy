@@ -64,6 +64,9 @@ class EvalTests(unittest.TestCase):
     def test_nested_add(self):
         self.assertEqual(run(['+', ['+', 1, ['+', 0, 2]], 3]), 6)
 
+    def test_subtract_operation(self):
+        self.assertEqual(run(['-', 3, 2]), 1)
+
 
 if __name__ == '__main__':
     unittest.main()
