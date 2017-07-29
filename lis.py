@@ -1,3 +1,7 @@
+Symbol = str
+List = list
+Number = (int, float)
+
 
 def tokenize(program):
     return program.replace('(', ' ( ').replace(')', ' ) ').split()
@@ -43,3 +47,11 @@ def atom(token):
             return float(token)
         except ValueError:
             return token
+
+
+def run(x):
+    if isinstance(x, Number):
+        return x
+    elif x[0] == '+':
+        _, p1, p2 = x
+        return run(p1) + run(p2)

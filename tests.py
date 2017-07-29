@@ -1,6 +1,7 @@
 import unittest
 
-from lis import tokenize, parse, close_bracket_index
+from lis import (
+    tokenize, parse, close_bracket_index, run)
 
 
 class TokenizeTestCase(unittest.TestCase):
@@ -53,6 +54,15 @@ class RecursiveParseTestCase(unittest.TestCase):
         self.assertEqual(
             parse('(begin (define r 3) (+ r 5))'),
             ['begin', ['define', 'r', 3], ['+', 'r', 5]])
+
+
+class EvalTests(unittest.TestCase):
+
+    def test_simple_add(self):
+        self.assertEqual(run(['+', 1, 2]), 3)
+
+    def test_nested_add(self):
+        self.assertEqual(run(['+', ['+', 1, ['+', 0, 2]], 3]), 6)
 
 
 if __name__ == '__main__':
