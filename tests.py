@@ -70,6 +70,14 @@ class EvalTests(unittest.TestCase):
     def test_multiple_operations(self):
         self.assertEqual(run(['-', ['+', 3, 10], ['/', ['*', 4, 5], 5]]), 9)
 
+    def test_gt_lt_comparison(self):
+        prog = ['=', ['<', 4, 3], ['>', 3, 2]]
+        self.assertEqual(run(prog), False)
+
+    def test_gte_lte_comparison(self):
+        prog = ['=', ['<=', 4, 4], ['>=', 3, 2]]
+        self.assertEqual(run(prog), True)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -53,7 +53,8 @@ def atom(token):
 
 
 env = {
-    '+': op.add, '-': op.sub, '*': op.mul, '/': op.truediv
+    '+': op.add, '-': op.sub, '*': op.mul, '/': op.truediv,
+    '>': op.gt, '<': op.lt, '>=': op.ge, '<=': op.le, '=': op.eq,
 }
 
 
