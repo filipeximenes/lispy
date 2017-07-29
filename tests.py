@@ -67,6 +67,9 @@ class EvalTests(unittest.TestCase):
     def test_subtract_operation(self):
         self.assertEqual(run(['-', 3, 2]), 1)
 
+    def test_multiple_operations(self):
+        self.assertEqual(run(['-', ['+', 3, 10], ['/', ['*', 4, 5], 5]]), 9)
+
 
 if __name__ == '__main__':
     unittest.main()
