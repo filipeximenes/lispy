@@ -81,6 +81,9 @@ class EvalTests(unittest.TestCase):
     def test_abs(self):
         self.assertEqual(run(['abs', -3]), 3)
 
+    def test_begin(self):
+        self.assertEqual(run(['begin', ['+', 1, 2], ['+', 2, 3]]), 5)
+
 
 if __name__ == '__main__':
     unittest.main()
