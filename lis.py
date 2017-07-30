@@ -19,11 +19,11 @@ def close_bracket_index(tokens, index=0, opening=0, closing=0):
         return index - 1
 
     if tokens[0] == '(':
-        return close_bracket_index(tokens[1:], index=index+1, opening=opening+1, closing=closing)
+        opening += 1
     elif tokens[0] == ')':
-        return close_bracket_index(tokens[1:], index=index+1, opening=opening, closing=closing+1)
-    else:
-        return close_bracket_index(tokens[1:], index=index+1, opening=opening, closing=closing)
+        closing += 1
+
+    return close_bracket_index(tokens[1:], index=index+1, opening=opening, closing=closing)
 
 
 def parse_tokens(tokens):
