@@ -55,6 +55,7 @@ def atom(token):
 env = {
     '+': op.add, '-': op.sub, '*': op.mul, '/': op.truediv,
     '>': op.gt, '<': op.lt, '>=': op.ge, '<=': op.le, '=': op.eq,
+    'abs': abs,
 }
 
 
@@ -63,5 +64,5 @@ def run(x):
         return x
     else:
         proc = env[x[0]]
-        _, p1, p2 = x
-        return proc(run(p1), run(p2))
+        params = [run(p) for p in x[1:]]
+        return proc(*params)

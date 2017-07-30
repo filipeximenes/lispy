@@ -78,6 +78,9 @@ class EvalTests(unittest.TestCase):
         prog = ['=', ['<=', 4, 4], ['>=', 3, 2]]
         self.assertEqual(run(prog), True)
 
+    def test_abs(self):
+        self.assertEqual(run(['abs', -3]), 3)
+
 
 if __name__ == '__main__':
     unittest.main()
